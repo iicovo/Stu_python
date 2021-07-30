@@ -7,39 +7,42 @@ import time
 
 """ 批量下载歌单歌曲 """
 
-user = ''  # ##这里添加网易账号
-pwd = ''  # ##这里添加网易密码
+user = 'iicovo@163.com'  # ##这里添加网易账号
+pwd = 'Kong6666*'  # ##这里添加网易密码
 
 
 def gain_list(gain_url):
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get(gain_url)
+    cookies = dict(name="WM_TID", value='5SvKbGNNTp5AVFAVRFZ7XS%2B%2BXkeB1vdC')
+    driver.add_cookie(cookies)
 
-    try:
-        driver.find_element_by_css_selector('.link.s-fc3').click()  # 点击登录
-        time.sleep(1)
-        driver.find_element_by_css_selector('.u-btn2.other').click()  # 选择其他方式
+    driver.get(gain_url)
 
-        driver.find_element_by_id('j-official-terms').click()  # 点击同意
+    # try:
+    #     driver.find_element_by_css_selector('.link.s-fc3').click()  # 点击登录
+    #     time.sleep(1)
+    #     driver.find_element_by_css_selector('.u-btn2.other').click()  # 选择其他方式
+    #
+    #     driver.find_element_by_id('j-official-terms').click()  # 点击同意
+    #
+    #     driver.find_element_by_css_selector('.u-mlg2.u-mlg2-wy').click()  # 网易账户登录
+    #     time.sleep(1)
+    #
+    #     username = driver.find_element_by_id('e')
+    #     username.send_keys(user)
+    #     time.sleep(1)
+    #
+    #     kwd = driver.find_element_by_id('epw')
+    #     kwd.send_keys(pwd)
+    #     time.sleep(1)
+    #
+    #     driver.find_element_by_css_selector('.js-primary.u-btn2.u-btn2-2').click()
+    #     time.sleep(15)
 
-        driver.find_element_by_css_selector('.u-mlg2.u-mlg2-wy').click()  # 网易账户登录
-        time.sleep(1)
-
-        username = driver.find_element_by_id('e')
-        username.send_keys(user)
-        time.sleep(1)
-
-        kwd = driver.find_element_by_id('epw')
-        kwd.send_keys(pwd)
-        time.sleep(1)
-
-        driver.find_element_by_css_selector('.js-primary.u-btn2.u-btn2-2').click()
-        time.sleep(5)
-
-    except Exception:
-        print('登录失败!')
-        pass
+    # except Exception:
+    #     print('登录失败!')
 
     driver.switch_to.frame('contentFrame')
     source = driver.page_source
@@ -56,7 +59,7 @@ def gain_list(gain_url):
         title = re.search('title="(.*?)"', x).group(1)  # 获取歌曲名
         id_list.append(counts)
         name_list.append(title)
-
+    print("获取歌名id成功！！！")
     for i in range(len(id_list)):
         download(id_list[i], name_list[i])  # 逐个进行下载
         time.sleep(1)

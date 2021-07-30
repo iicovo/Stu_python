@@ -7,16 +7,16 @@ import requests
 class Clock_in:
 
     def __init__(self):
-        self.user = "599520857@qq.com"
+        self.user = "iicovo@qq.com"
         self.pwd = "kkk00000"
 
     def get_url(self):
         urls = ["https://xxjc.pro", "https://xxjc.vip", "https://xxjc.host"]
-        for i in range(len(urls)):
-            req = requests.get(urls[i])
-            if req.status_code == 200:
-                Clock_in.Qian_dao(self, urls[i])
-                break
+        # for i in range(len(urls)):
+        #     req = requests.get(urls[i])
+        #     if req.status_code == 200:
+        Clock_in.Qian_dao(self, urls[1])
+        # break
 
     def Qian_dao(self, url):
         # options = webdriver.ChromeOptions()
